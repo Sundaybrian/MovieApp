@@ -25,7 +25,7 @@ $(document).ready(() => {
         <img src="${movie.Poster}">
         <h5>${movie.Title}</h5>
 
-        <a onClick="movieSelected('${movie.imdbID}')" class="btn btn -primary" href="#"></a>
+        <a onClick="movieSelected('${movie.imdbID}')" class="btn btn-primary" href="#">View Details</a>
 
         </div>
 
