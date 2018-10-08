@@ -44,6 +44,14 @@ $(document).ready(() => {
   }
 
 
+  function movieSelected(id){
+    sessionStorage.setItem('movieId',id);
+    window.location="movie.html";
+    return false;
+    
+  }
+
+
 
 
 });
