@@ -15,6 +15,26 @@ $(document).ready(() => {
     axios.get('http://www.omdbapi.com/?apikey=c729fcf0&s=' +searchText)
     .then(function (response) {
       console.log(response);
+      let movies = response.data.Search;
+      let output='';
+
+      $.each(movies,(index,movie)=>{
+        output+=`
+        <div class="col-md-3">
+        <div class="well text-center">
+        <img src="${movie.Poster}">
+        <h5>${movie.Title}</h5>
+
+        <a onClick="movieSelected('${movie.imdbID}')" class="btn btn -primary" href="#"></a>
+
+        </div>
+
+        </div>
+        `;
+      });
+
+      $('#movies').html(output);
+
     })
     .catch(function (error) {
       console.log(error);
@@ -23,7 +43,7 @@ $(document).ready(() => {
 
   }
 
-  $('#movies').html(response.data.Title);
+
 
 
 });
