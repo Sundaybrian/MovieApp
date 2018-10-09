@@ -10,45 +10,58 @@ $(document).ready(() => {
 
   });
 
-  function getMovies(searchText){
+  function getMovies(searchText) {
     console.log(searchText);
-    axios.get('http://www.omdbapi.com/?apikey=c729fcf0&s=' +searchText)
-    .then(function (response) {
-      console.log(response);
-      let movies = response.data.Search;
-      let output='';
+    axios.get('http://www.omdbapi.com/?apikey=c729fcf0&s=' + searchText)
+      .then(function(response) {
+        console.log(response);
+        let movies = response.data.Search;
+        let output = '';
 
-      $.each(movies,(index,movie)=>{
-        output+=`
+        $.each(movies, (index, movie) => {
+          output += `
         <div class="col-md-3">
         <div class="well text-center">
         <img src="${movie.Poster}">
         <h5>${movie.Title}</h5>
 
-        <a onClick="movieSelected('${movie.imdbID}')" class="btn btn-primary" href="#">View Details</a>
+        <a onclick="movieSelected('${movie.imdbID}')" class="btn btn-primary" href="#">View Details</a>
 
         </div>
-
         </div>
         `;
+        });
+
+        $('#movies').html(output);
+
+      })
+      .catch(function(error) {
+        console.log(error);
       });
-
-      $('#movies').html(output);
-
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
 
 
   }
 
 
-  function movieSelected(id){
-    sessionStorage.setItem('movieId',id);
-    window.location="movie.html";
+  function movieSelected(id) {
+    sessionStorage.setItem('movieId', id);
+    window.location = 'movie.html';
     return false;
-    
+  }
+
+  function getMovie() {
+
+    let movieId = sessionStorage.getItem('movieId');
+
+    axios.get('http://www.omdbapi.com/?apikey=c729fcf0&i=' + movieId)
+      .then(function(response) {
+        console.log(response);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+
+
   }
 
 
